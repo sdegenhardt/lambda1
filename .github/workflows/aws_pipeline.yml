@@ -37,3 +37,5 @@ jobs:
 
     - name: Test
       run: dotnet test --filter .Tests --no-build
+      working-directory: src
+      

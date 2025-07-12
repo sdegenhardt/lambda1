@@ -36,6 +36,6 @@ jobs:
       working-directory: src
 
     - name: Test
-      run: dotnet test --filter .Tests --no-build
+      run: dotnet test --filter .Tests
       working-directory: src
-      
+

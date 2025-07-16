@@ -37,7 +37,7 @@ jobs:
       working-directory: src
 
     - name: Integration Tests
-      run: dotnet test --filter .Tests
+      run: dotnet test --filter .IntegrationTests
       working-directory: src
 
 #    - name: Publish

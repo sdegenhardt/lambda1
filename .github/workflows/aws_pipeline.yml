@@ -23,6 +23,10 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
+    - name: Clean
+      run: dotnet clean
+      working-directory: src
+
 #    - name: Restore
 #      run: dotnet restore
 #      working-directory: src

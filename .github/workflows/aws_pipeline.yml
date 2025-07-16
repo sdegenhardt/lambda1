@@ -27,9 +27,14 @@ jobs:
       run: dotnet clean
       working-directory: src
 
-    - name: Build
-      run: dotnet build --configuration Release --framework ${{ env.FRAMEWORK }} --self-contained false -p:FileVersion=${{ env.VERSION }} -p:VersionPrefix=${{ env.VERSION }} -p:SourceRevisionId=${{ github.sha }} -p:DebugType=None -p:DebugSymbols=False
+    - name: Restore
+      run: dotnet restore
       working-directory: src
+
+    - name: Build
+      run: dotnet build --no-restore --configuration Release --self-contained false -p:FileVersion=${{ env.VERSION }} -p:VersionPrefix=${{ env.VERSION }} -p:SourceRevisionId=${{ github.sha }} -p:DebugType=None -p:DebugSymbols=False
+      working-directory: src
+      # --framework ${{ env.FRAMEWORK }}
 
     - name: Unit Tests
       run: dotnet test --filter .Tests

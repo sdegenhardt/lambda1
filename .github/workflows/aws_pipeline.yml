@@ -1,3 +1,7 @@
+# TODO
+# - name the build
+# - create a specific package for deployment
+
 name: build
 
 on:

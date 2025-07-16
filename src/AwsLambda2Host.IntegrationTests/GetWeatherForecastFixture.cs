@@ -26,6 +26,6 @@ public class GetWeatherForecastFixture : IClassFixture<TestWebApplicationFactory
         response.EnsureSuccessStatusCode();
         var json = await response.Content.ReadAsStringAsync();
         var result = JsonSerializer.Deserialize<GetWeatherForecastResponse[]>(json);
-        Assert.Equal(expectedItems, result.Length);
+        Assert.Equal(expectedItems, result?.Length ?? 0);
     }
 }

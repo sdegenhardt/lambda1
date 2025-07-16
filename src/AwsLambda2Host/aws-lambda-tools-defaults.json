@@ -17,5 +17,5 @@
   "function-name": "xx13-dev-test1",
   "environment-variables": "ASPNETCORE_ENVIRONMENT=Development;Name=Value",
   "function-url-enable": true,
-  "function-role": "xx13-dev-lm-basic"
+  "function-role": "xx13-dev-lm-xyzf"
 }

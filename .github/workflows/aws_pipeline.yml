@@ -16,6 +16,15 @@ env:
   FRAMEWORK: 'net8.0'
 
 jobs:
+  scan:
+    name: gitleaks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+
   build:
     name: build
     runs-on: ubuntu-latest
@@ -36,9 +45,8 @@ jobs:
       working-directory: src
 
     - name: Build
-      run: dotnet build --no-restore --configuration Release --self-contained false -p:FileVersion=${{ env.VERSION }} -p:VersionPrefix=${{ env.VERSION }} -p:SourceRevisionId=${{ github.sha }} -p:DebugType=None -p:DebugSymbols=False /maxcpucount:1
+      run: dotnet build --no-restore --framework ${{ env.FRAMEWORK }} --configuration Release --self-contained false -p:FileVersion=${{ env.VERSION }} -p:VersionPrefix=${{ env.VERSION }} -p:SourceRevisionId=${{ github.sha }} -p:DebugType=None -p:DebugSymbols=False /maxcpucount:1
       working-directory: src
-      # --framework ${{ env.FRAMEWORK }}
 
     - name: Unit Tests
       run: dotnet test --filter .Tests

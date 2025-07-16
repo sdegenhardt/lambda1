@@ -8,6 +8,12 @@ env:
   DOTNET_VERSION: '8.x'   # i.e. The Latest .NET 8 SDK version to use
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  MAJOR: '1'
+  MINOR: '0'
+  BUILD: ${{ github.run_number }}
+  PATCH: '0'
+  VERSION: $MAJOR.$MINOR.$BUILD.$PATCH
+  FRAMEWORK: 'net8.0'
 
 jobs:
   build:
@@ -29,7 +35,11 @@ jobs:
       working-directory: src
       
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: |
+        dotnet build --configuration Release --no-restore --framework $FRAMEWORK --self-contained false \
+          -p:FileVersion=$VERSION -p:VersionPrefix=$VERSION \
+          -p:SourceRevisionId=${{ github.sha }} \
+          -p:DebugType=None -p:DebugSymbols=False
       working-directory: src
 
     - name: Unit Tests
@@ -47,8 +57,17 @@ jobs:
 #      working-directory: src
 
     - name: AWS CLI
+      if: false
       run: dotnet tool install -g Amazon.Lambda.Tools
-      
+
+    - name: Package
+      if: false
+#      run: dotnet lambda package --region us-east-2 -c Release -f net8.0 -farch arm64 -p:PublishReadyToRun=true -o ../publish/test.zip
+      run: dotnet lambda package --region us-east-2 -c Release -f net8.0 -farch x86_64 -p:PublishReadyToRun=true -o ../publish/test.zip
+      working-directory: src/AwsLambda2Host
+
     - name: Deploy
-      run: dotnet lambda deploy-function AwsLambda2Host
+      if: false
+#      run: dotnet lambda deploy-function xx13-dev-test1
+      run: dotnet lambda deploy-function -pac ../publish/test.zip -fn xx13-dev-test1
       working-directory: src/AwsLambda2Host

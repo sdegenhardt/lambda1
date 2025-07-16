@@ -81,17 +81,17 @@ jobs:
 #      working-directory: src
 
     - name: AWS CLI
-      if: false
+      if: true
       run: dotnet tool install -g Amazon.Lambda.Tools
 
     - name: Package
-      if: false
+      if: true
 #      run: dotnet lambda package --region us-east-2 -c Release -f net8.0 -farch arm64 -p:PublishReadyToRun=true -o ../../publish/test.zip
       run: dotnet lambda package --region ${{ env.REGION }} -c Release -f ${{ env.FRAMEWORK }} -farch ${{ env.ARCH }} -p:PublishReadyToRun=true -o ../../publish/deploy.zip --msbuild-parameters "-p:FileVersion=${{ env.VERSION }} -p:VersionPrefix=${{ env.VERSION }} -p:SourceRevisionId=${{ github.sha }} -p:DebugType=None -p:DebugSymbols=False"
       working-directory: src/AwsLambda2Host
 
     - name: Deploy
-      if: false
+      if: true
       run: dotnet lambda deploy-function -pac ../../publish/deploy.zip -fn xx13-dev-test1
       #run: dotnet lambda deploy-function xx13-dev-test1
       working-directory: src/AwsLambda2Host

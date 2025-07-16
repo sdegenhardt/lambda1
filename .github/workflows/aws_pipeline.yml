@@ -13,18 +13,13 @@ env:
 
 jobs:
   build:
-    name: build-${{matrix.os}}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
+    name: build-$VERSION
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: Info
       run: echo "Version $VERSION"
@@ -35,7 +30,7 @@ jobs:
       
     - name: Build
       working-directory: src
-      run: dotnet build --configuration Release --no-restore --framework "$FRAMEWORK" --self-contained false -p:FileVersion="$VERSION" -p:VersionPrefix="$VERSION" -p:SourceRevisionId=${{ github.sha }} -p:DebugType=None -p:DebugSymbols=False
+      run: dotnet build --configuration Release --no-restore --framework ${{ env.FRAMEWORK }} --self-contained false -p:FileVersion=${{ env.VERSION }} -p:VersionPrefix=$ {{ env.VERSION }} -p:SourceRevisionId=${{ github.sha }} -p:DebugType=None -p:DebugSymbols=False
 
     - name: Unit Tests
       run: dotnet test --filter .Tests

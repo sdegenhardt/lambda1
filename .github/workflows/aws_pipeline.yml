@@ -32,7 +32,10 @@ jobs:
       
     - name: Build
       run: |
-        dotnet build --configuration Release --no-restore --framework "$FRAMEWORK" --self-contained false -p:FileVersion="$VERSION" -p:VersionPrefix="$VERSION" -p:SourceRevisionId=${{ github.sha }} -p:DebugType=None -p:DebugSymbols=False
+        dotnet build --configuration Release --no-restore --framework $FRAMEWORK --self-contained false -p:FileVersion=$VERSION" -p:VersionPrefix=$VERSION -p:SourceRevisionId=${{ github.sha }} -p:DebugType=None -p:DebugSymbols=False
+      with:
+        VERSION: '1.0.${{ github.run_number }}.0'
+        FRAMEWORK: 'net8.0'
       working-directory: src
 
     - name: Unit Tests

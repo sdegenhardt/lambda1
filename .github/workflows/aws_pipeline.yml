@@ -3,14 +3,14 @@ name: build
 on:
   push:
     branches: [ main ]
+
 env:
-  DOTNET_VERSION: '8.x' # The Latest .NET 8 SDK version to use
+  DOTNET_VERSION: '8.x'   # i.e. The Latest .NET 8 SDK version to use
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 jobs:
   build:
-
     name: build-${{matrix.os}}
     runs-on: ${{ matrix.os }}
     strategy:
@@ -32,8 +32,17 @@ jobs:
       run: dotnet build --configuration Release --no-restore
       working-directory: src
 
-    - name: Test
+    - name: Unit Tests
       run: dotnet test --filter .Tests
+      working-directory: src
+
+    - name: Integration Tests
+      run: dotnet test --filter .Tests
+      working-directory: src
+
+    - name: Publish
+#      run: dotnet publish --no-restore -c Release -r linux-x64 -p:PublishSingleFile=false -p:PublishTrimmed=false -p:DebugType=None -p:DebugSymbols=false --self-contained false -p:PublishReadyToRun=true
+      run: dotnet publish -c Release -r linux-arm64 -p:PublishSingleFile=false -p:PublishTrimmed=false -p:DebugType=None -p:DebugSymbols=false --self-contained true -p:PublishReadyToRun=true
       working-directory: src
 
     - name: AWS CLI

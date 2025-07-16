@@ -1,6 +1,6 @@
-@AwsLambda2.Host_HostAddress = http://localhost:5158
+@AwsLambda2Host_HostAddress = http://localhost:5158
 
-GET {{AwsLambda2.Host_HostAddress}}/weatherforecast/
+GET {{AwsLambda2Host_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###

@@ -5,11 +5,15 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AWSProjectType>lambda</AWSProjectType>
-    <RootNamespace>AwsLambda2.Host</RootNamespace>
+    <RootNamespace>AwsLambda2Host</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Amazon.Lambda.AspNetCoreServer.Hosting" Version="1.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UseCases\UseCases.csproj" />
   </ItemGroup>
   
 </Project>

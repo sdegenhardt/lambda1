@@ -36,7 +36,7 @@ jobs:
       working-directory: src
 
     - name: Build
-      run: dotnet build --no-restore --configuration Release --self-contained false -p:FileVersion=${{ env.VERSION }} -p:VersionPrefix=${{ env.VERSION }} -p:SourceRevisionId=${{ github.sha }} -p:DebugType=None -p:DebugSymbols=False
+      run: dotnet build --no-restore --configuration Release --self-contained false -p:FileVersion=${{ env.VERSION }} -p:VersionPrefix=${{ env.VERSION }} -p:SourceRevisionId=${{ github.sha }} -p:DebugType=None -p:DebugSymbols=False /maxcpucount:1
       working-directory: src
       # --framework ${{ env.FRAMEWORK }}
 

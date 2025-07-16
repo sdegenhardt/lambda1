@@ -8,7 +8,7 @@ env:
   DOTNET_VERSION: '8.x'   # i.e. The Latest .NET 8 SDK version to use
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  VERSION: '1.0.${{ github.run_number }}.0`
+  VERSION: '1.0.${{ github.run_number }}.0'
   FRAMEWORK: 'net8.0'
 
 jobs:

@@ -1,8 +1,3 @@
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using UseCases;
-using UseCases.Abstractions;
-
 namespace AwsLambda2Host.Endpoints.WeatherForecast;
 
 public class GetWeatherForecastEndpoint : IEndpoint
@@ -19,9 +14,4 @@ public class GetWeatherForecastEndpoint : IEndpoint
             return TypedResults.Ok(result);
         }).WithName("GetWeatherForecast");
     }
-}
-
-public interface IEndpoint
-{
-    void MapEndpoint(IEndpointRouteBuilder routeBuilder);
 }

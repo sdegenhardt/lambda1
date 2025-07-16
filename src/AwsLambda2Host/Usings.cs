@@ -1,0 +1,10 @@
+global using System.Threading;
+global using System.Threading.Tasks;
+global using AwsLambda2Host.Abstractions;
+global using Microsoft.AspNetCore.Builder;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.AspNetCore.Http.HttpResults;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Routing;
+global using UseCases;
+global using UseCases.Abstractions;

@@ -1,6 +1,8 @@
+using System.Net.Http;
 using System.Text.Json;
-using AwsLambda2Host.Endpoints.WeatherForecast;
+using System.Threading.Tasks;
 using UseCases;
+using Xunit;
 
 namespace AwsLambda2Host.IntegrationTests;
 

@@ -1,6 +1,4 @@
-﻿using UseCases.Abstractions;
-
-namespace UseCases;
+﻿namespace UseCases;
 
 public class GetForecastHandler : IQueryHandler<NoQuery, GetWeatherForecastResponse[]>
 {

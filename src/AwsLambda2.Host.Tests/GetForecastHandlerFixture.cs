@@ -1,6 +1,4 @@
-﻿using UseCases;
-
-namespace AwsLambda2.Host.Tests;
+﻿namespace AwsLambda2.Host.Tests;
 
 public class GetForecastHandlerFixture
 {

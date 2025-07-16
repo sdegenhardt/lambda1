@@ -49,12 +49,25 @@ jobs:
       working-directory: src
 
     - name: Unit Tests
-      run: dotnet test --filter .Tests
+      run: dotnet test --filter .Tests --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
       working-directory: src
 
     - name: Integration Tests
-      run: dotnet test --filter .IntegrationTests
+      run: dotnet test --filter .IntegrationTests --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
       working-directory: src
+
+    - name: Code Coverage Report
+      uses: irongut/CodeCoverageSummary@v1.3.0
+      with:
+        filename: coverage/**/coverage.cobertura.xml
+        badge: true
+        fail_below_min: true
+        format: markdown
+        hide_branch_rate: false
+        hide_complexity: true
+        indicators: true
+        output: both
+        thresholds: '60 80'
 
 #    - name: Publish
 #      run: dotnet publish --no-restore -c Release --framework net8.0 -r linux-x64 -p:PublishSingleFile=false -p:PublishTrimmed=false -p:DebugType=None -p:DebugSymbols=false --self-contained false -p:PublishReadyToRun=true
@@ -74,6 +87,6 @@ jobs:
 
     - name: Deploy
       if: false
-#      run: dotnet lambda deploy-function xx13-dev-test1
-      run: dotnet lambda deploy-function -pac ../publish/test.zip -fn xx13-dev-test1
+      run: dotnet lambda deploy-function xx13-dev-test1
+#      run: dotnet lambda deploy-function -pac ../publish/test.zip -fn xx13-dev-test1
       working-directory: src/AwsLambda2Host

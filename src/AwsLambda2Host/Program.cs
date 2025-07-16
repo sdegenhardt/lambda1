@@ -1,7 +1,6 @@
 using System.Reflection;
 using AwsLambda2Host.Extensions;
-using UseCases;
-using UseCases.Abstractions;
+using Microsoft.Extensions.DependencyInjection;
 using UseCases.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);

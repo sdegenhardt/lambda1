@@ -1,5 +1,5 @@
 using System.Reflection;
-using AwsLambda2Host.Endpoints.WeatherForecast;
+using Microsoft.Extensions.DependencyInjection;
 using UseCases.Extensions;
 
 namespace AwsLambda2Host.Extensions;

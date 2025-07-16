@@ -12,7 +12,7 @@ env:
   MINOR: '0'
   BUILD: ${{ github.run_number }}
   PATCH: '0'
-  VERSION: $MAJOR.$MINOR.$BUILD.$PATCH
+  VERSION: ${{ MAJOR }}.${{ MINOR }}.${{ BUILD}}.${{ PATCH }}
   FRAMEWORK: 'net8.0'
 
 jobs:

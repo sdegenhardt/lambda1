@@ -1,5 +1,6 @@
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using UseCases;
 using Xunit;
@@ -30,4 +31,28 @@ public class GetWeatherForecastFixture : IClassFixture<TestWebApplicationFactory
         var result = JsonSerializer.Deserialize<GetWeatherForecastResponse[]>(json);
         Assert.Equal(expectedItems, result?.Length ?? 0);
     }
+
+    [Theory]
+    [InlineData("/Versions")]
+    public async Task Versions_Get_ReturnsOk(string path)
+    {
+        // Act
+        var response = await _httpClient.GetAsync(path);
+
+        // Assert
+        response.EnsureSuccessStatusCode();
+        var json = await response.Content.ReadAsStringAsync();
+        Assert.True(json?.Length > 0);
+        var result = JsonSerializer.Deserialize<VersionDto>(json);
+        Assert.NotNull(result);
+    }
+}
+
+internal class VersionDto
+{
+    [JsonPropertyName("version")]
+    public string Version { get; set; }
+
+    [JsonPropertyName("gitCommitHash")]
+    public string GitCommitHash { get; set; }
 }
